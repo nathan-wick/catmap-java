@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.catmap</groupId>
+	<artifactId>catmap</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>catmap</name>
+	<description>Welcome to our campus parking app! This innovative web app provides real-time information about the availability of parking spaces on campus. With the help of this app, you can easily locate the nearest parking lot and determine how full it is at the moment. The map displays each parking lot with a pin, and the color of the pin indicates the current level of occupancy. This way, you can make an informed decision about where to park and save time searching for a spot. You can also select the pin to see an estimation on the selected parking lots&apos; future occupancy. Whether you&apos;re a student, staff member, or visitor, this app makes finding a parking space on campus a breeze. Get started now and never worry about circling around for a spot again!</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
