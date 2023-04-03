@@ -40,5 +40,10 @@ public class FacilityDTO {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	@Override
+	public String toString() {
+		return name + ": " + available + " spots available of " + capacity;
+	}
 
 }
