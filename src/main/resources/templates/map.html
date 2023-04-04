@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org">
+	<head>
+		<meta charset="ISO-8859-1" />
+		<title>CatMap</title>
+	</head>
+	<body>
+		<h1>Welcome to CatMap!</h1>
+		<h3>Facilities:</h3>
+		<ul th:each="facility : ${facilities}">
+			<li>
+				<p th:text="${facility}"/>
+			</li>
+		</ul>
+	</body>
+</html>
