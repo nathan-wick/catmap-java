@@ -1,10 +1,9 @@
 package com.catmap.dto;
 
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Map;
-
-
 
 public class FacilityDTO {
 	
@@ -92,3 +91,5 @@ public class FacilityDTO {
 		
 		    
 		}
+
+	

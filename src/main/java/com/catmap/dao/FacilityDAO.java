@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.catmap.dto.FacilityDTO;
 
 @Component
@@ -18,6 +17,7 @@ public class FacilityDAO implements IFacilityDAO {
 	
 	@Override
 	public List<FacilityDTO> fetch() throws Exception {
+
 	    List<FacilityDTO> facilities = new ArrayList<FacilityDTO>();
 	    String jsonFacilitiesRaw = networkDAO.request("https://cso.uc.edu:3000/occupancy");
 	    JSONArray jsonFacilities = new JSONArray(jsonFacilitiesRaw);

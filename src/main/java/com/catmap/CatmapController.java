@@ -31,8 +31,7 @@ public class CatmapController {
 		}
 		return modelAndView;
 	}
-	
-	
 
 }
+
 
