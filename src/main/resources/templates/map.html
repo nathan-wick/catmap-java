@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>Catmap</title>
+    <title>CatMap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -15,6 +15,7 @@
             border-radius: 5px;
             margin-bottom: 20px;
         }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -23,6 +24,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
+        
         h1 {
             text-align: center;
             margin-top: 0;
@@ -30,26 +32,26 @@
         }
         
         :root {
-          --gradient-2: linear-gradient(90deg, #ED1A80, #ED1AE6);
-          --white: #fff;
-          --fs-8: 1.0 rem;
-		  --fw-500: 500;
-		  --transition-2: 0.35s ease;
-		  .h1,
-		  .h3 { font-family: var(--ff-source-sans-pro); }
-        }
+		      --gradient-2: linear-gradient(90deg, #ED1A80, #ED1AE6);
+		      --white: #fff;
+		      --fs-8: 1.0 rem;
+			--fw-500: 500;
+			--transition-2: 0.35s ease;
+		}
+		
+		.h1, .h3 { font-family: var(--ff-source-sans-pro); }
         
         .btn {
-        background-image: var(--gradient-2);
-        background-size: 200%;        
-	    margin-top: 20px;
-	    padding: 10px 20px;
-  		color: var(--white);
-	    border: none;
-  		border-radius: 0 25px;
-	    cursor: pointer;
-		font-size: var(--fs-8);
-  		font-weight: var(--fw-500);
+	        background-image: var(--gradient-2);
+	        background-size: 200%;        
+		    margin-top: 20px;
+		    padding: 10px 20px;
+	  		color: var(--white);
+		    border: none;
+	  		border-radius: 0 25px;
+		    cursor: pointer;
+			font-size: var(--fs-8);
+	  		font-weight: var(--fw-500);
 		}
 
 		.btn:is(:hover, :focus) { background-position: right; }
@@ -59,28 +61,29 @@
             justify-content: center;
             display: none;
         }
+        
         .nearby .btn {
             margin-left: 10px;
         }
+        
         #refresh {
 		  display: none;
 		}
 		
 		.garage-details {
-	    margin-top: 20px;
-	    padding: 10px;
-	    background-color: #fff;
-	    border-radius: 10px;
-	    text-align: center;
-	}
+		    margin-top: 20px;
+		    padding: 10px;
+		    background-color: #fff;
+		    border-radius: 10px;
+		    text-align: center;
+		}
 	
 		.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-			
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  margin-bottom: 20px;
+		}
         
     </style>
 </head>
@@ -88,7 +91,7 @@
 	
 	    <div class="container">
 		<div class="header">
-		    <h1>Welcome to Catmap</h1>
+		<h1>Welcome to CatMap</h1>
 	    </div>
 	        <div id="mapid"></div>
 	        <div class="nearby">
