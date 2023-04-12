@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>Catmap</title>
+    <title>CatMap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -52,6 +52,7 @@
   		border-radius: 0 25px;
 		font-size: var(--fs-8);
   		font-weight: var(--fw-500);
+
 		}
 
 		.btn:is(:hover, :focus) { background-position: right; }
@@ -77,7 +78,7 @@
 </head>
 <body>	
 	    <div class="container">		
-		    <h1 class="display-4 text-center mt-0">Welcome to Catmap</h1>	    
+		    <h1 class="display-4 text-center mt-0">Welcome to Catmap</h1>
 	        <div id="mapid"></div>
 	        <div class="nearby">
 			    <button style='margin-right:16px' class="btn btn-primary">Occupancy Graph</button>
