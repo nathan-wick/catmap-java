@@ -23,13 +23,13 @@ class CatmapApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+
 	//Unit test for fetch function
 	@Test
 	public void facilityFetchValidation() throws Exception {
 		whenFetchIsMade();
 		checkIfWorking();
 	}
-
 
 	//test fetch
 	private void whenFetchIsMade() throws Exception {
