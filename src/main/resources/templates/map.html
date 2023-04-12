@@ -6,52 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
     <style>
         #mapid {
             height: 500px;
             width: 100%;
-            border: 1px solid #ccc;
+            border: 1px solid #fff;
             border-radius: 5px;
             margin-bottom: 20px;
         }
-        
+
+        :root {
+          --gradient-2: linear-gradient(90deg, #E00122, #ef546c);
+          --white: #fff;
+          --black: #000000;
+          --fs-8: 1.0 rem;
+		  --fw-500: 500;
+          --uc-red-color: #E00122;
+		  --transition-2: 0.35s ease;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #820682;
+            background-color: #000000;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-        
+        }        
+               
         h1 {
-            text-align: center;
-            margin-top: 0;
-            color: var(--white);
+			font-family: "PT Sans", sans-serif;
+            color: var(--uc-red-color);
         }
-        
-        :root {
-		      --gradient-2: linear-gradient(90deg, #ED1A80, #ED1AE6);
-		      --white: #fff;
-		      --fs-8: 1.0 rem;
-			--fw-500: 500;
-			--transition-2: 0.35s ease;
-		}
-		
-		.h1, .h3 { font-family: var(--ff-source-sans-pro); }
-        
+
+        .h3 { font-family: var(--ff-source-sans-pro); }
+            
         .btn {
-	        background-image: var(--gradient-2);
-	        background-size: 200%;        
-		    margin-top: 20px;
-		    padding: 10px 20px;
-	  		color: var(--white);
-		    border: none;
-	  		border-radius: 0 25px;
-		    cursor: pointer;
-			font-size: var(--fs-8);
-	  		font-weight: var(--fw-500);
+        background-image: var(--gradient-2);
+        background-size: 200%;        
+	    margin-top: 20px;
+	    padding: 10px 20px;
+	    border: none;
+  		border-radius: 0 25px;
+		font-size: var(--fs-8);
+  		font-weight: var(--fw-500);
+
 		}
 
 		.btn:is(:hover, :focus) { background-position: right; }
@@ -61,48 +62,31 @@
             justify-content: center;
             display: none;
         }
-        
+
         .nearby .btn {
             margin-left: 10px;
         }
-        
-        #refresh {
-		  display: none;
-		}
 		
 		.garage-details {
-		    margin-top: 20px;
-		    padding: 10px;
-		    background-color: #fff;
-		    border-radius: 10px;
-		    text-align: center;
-		}
-	
-		.header {
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-		  margin-bottom: 20px;
-		}
-        
+	    margin-top: 20px;
+	    padding: 10px;
+	    background-color: #fff;
+	    border-radius: 10px;
+	    text-align: center;
+	}		       
     </style>
 </head>
-<body>
-	
-	    <div class="container">
-		<div class="header">
-		<h1>Welcome to CatMap</h1>
-	    </div>
+<body>	
+	    <div class="container">		
+		    <h1 class="display-4 text-center mt-0">Welcome to Catmap</h1>
 	        <div id="mapid"></div>
 	        <div class="nearby">
-			    <button style='margin-right:16px' class="btn">Occupancy Graph</button>
-			    <button class="btn">Directions</button>
+			    <button style='margin-right:16px' class="btn btn-primary">Occupancy Graph</button>
+			    <button class="btn btn-primary">Directions</button>
 			</div>		
 			<div class="garage-details"></div>
 	    </div>
-	    
-	    
-	    
+	      
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
 	    
 	    <script th:inline="javascript">	 
