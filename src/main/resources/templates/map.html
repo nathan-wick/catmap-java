@@ -1,212 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8" />
-    <title>CatMap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        
-    <style>
-        #mapid {
-            height: 500px;
-            width: 100%;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
 
-        :root {
-          --gradient-2: linear-gradient(90deg, #E00122, #ef546c);
-          --white: #fff;
-          --black: #000000;
-          --fs-8: 1.0 rem;
-		  --fw-500: 500;
-          --uc-red-color: #E00122;
-		  --transition-2: 0.35s ease;
-        }
+	<head>
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #000000;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }        
-               
-        h1 {
-			font-family: "PT Sans", sans-serif;
-            color: var(--uc-red-color);
-        }
+		<meta charset="utf-8" />
+		<title>CatMap</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .h3 { font-family: var(--ff-source-sans-pro); }
-            
-        .btn {
-        background-image: var(--gradient-2);
-        background-size: 200%;        
-	    margin-top: 20px;
-	    padding: 10px 20px;
-	    border: none;
-  		border-radius: 0 25px;
-		font-size: var(--fs-8);
-  		font-weight: var(--fw-500);
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/styles/custom.css" />
 
-		}
+	</head>
 
-		.btn:is(:hover, :focus) { background-position: right; }
+	<body class="bg-dark text-white">
 
-        .nearby {
-            display: flex;
-            justify-content: center;
-            display: none;
-        }
+		<div th:replace="fragments/navigation :: nav"></div>
+		<div th:replace="fragments/map :: div"></div>
+		<div th:insert="fragments/facility :: div"></div>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+		<script th:inline="javascript">
+			var facilities = /*[[${facilities}]]*/ [];
+		</script>
+		<script src="/scripts/map.js"></script>
+	
+	</body>
 
-        .nearby .btn {
-            margin-left: 10px;
-        }
-		
-		.garage-details {
-	    margin-top: 20px;
-	    padding: 10px;
-	    background-color: #fff;
-	    border-radius: 10px;
-	    text-align: center;
-	}		       
-    </style>
-</head>
-<body>	
-	    <div class="container">		
-		    <h1 class="display-4 text-center mt-0">Welcome to Catmap</h1>
-	        <div id="mapid"></div>
-	        <div class="nearby">
-			    <button style='margin-right:16px' class="btn btn-primary">Occupancy Graph</button>
-			    <button class="btn btn-primary">Directions</button>
-			</div>		
-			<div class="garage-details"></div>
-	    </div>
-	      
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
-	    
-	    <script th:inline="javascript">	 
-	    
-	    var userMarker = null;
-	    var userlat = null;
-	    var userlng = null;
-	    
-	    function getUserLocation() {
-		  if (navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(function(position) {
-		      userlat = position.coords.latitude;
-		      userlng = position.coords.longitude;
-		      		
-		      // add marker for user location
-		      userMarker = L.marker([userlat, userlng]).addTo(map);
-		    },
-		    
-		    function(error) {
-		    alert("Error getting user location:" + error);
-		  	}
-		    
-		    );
-		  } else {
-		    alert("Geolocation is not supported by this browser.");
-		  }
-		}
-		
-		getUserLocation();
-			    	       	    
-		var facilities = /*[[${facilities}]]*/ [];
-		var map = L.map('mapid').setView([39.1312, -84.5167], 15);
-		
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		  attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-		  maxZoom: 18
-		}).addTo(map);
-		
-		var greenIcon = L.icon({
-		  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-		  iconSize: [25, 41],
-		  iconAnchor: [12, 41],
-		  popupAnchor: [1, -34],
-		  shadowSize: [41, 41]
-		});
-		
-		var redIcon = L.icon({
-		  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-		  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-		  iconSize: [25, 41],
-		  iconAnchor: [12, 41],
-		  popupAnchor: [1, -34],
-		  shadowSize: [41, 41]
-		});
-		
-		var nearbyDiv = document.querySelector('.nearby');
-		var occupancyGraphBtn = document.querySelectorAll('.btn')[0];
-		var directionsBtn = document.querySelectorAll('.btn')[1];
-		var garageDetailsDiv = document.querySelector('.garage-details');
-		
-		var selectedMarker = null;
-		
-		// function to display garage details
-		function displayGarageDetails(facility) {
-		  var parkavl = null;
-		  if(facility.available > 0) 
-		  {
-		  	parkavl = 'Parking Avaialble';
-		  }
-		  else
-		  {
-		  	parkavl = 'Parking Unavailable';
-		  }
-		  garageDetailsDiv.innerHTML = '<h3>' + facility.name + ': ' + parkavl + '</h3>'   		  
-		  + '<p>Total Parking Spots: ' + facility.capacity + '</p>' 
-		  + '<p>Available Spots: ' + facility.available + '</p>';
-		}
-		
-		// function to open directions link
-		function openDirectionsLink(lat, lng) {
-		  if (selectedMarker) {
-		    var directionsLink = 'https://www.google.com/maps/dir/?api=1&origin=' + userlat + ',' + userlng + '&destination=' + selectedMarker.getLatLng().lat + ',' + selectedMarker.getLatLng().lng;
-		    
-		    
-		    window.open(directionsLink, '_blank');
-		  }
-		}
-		
-		// loop through facilities and add markers to the map
-		// bind click event to each marker
-		for (var i = 0; i < facilities.length; i++) {
-		  var facility = facilities[i];
-		  var marker = L.marker([facility.lat, facility.lng], {icon: facility.available > 0 ? greenIcon : redIcon}).addTo(map);
-		
-		  // bind click event to open garage details
-		  marker.on('click', (function(facilityCopy) {
-		    return function(e) {
-		      displayGarageDetails(facilityCopy);
-		      nearbyDiv.style.display = 'flex';
-		      selectedMarker = e.target;
-		    }
-		  })(facility));
-		}
-		
-		// bind click event to open directions link
-		directionsBtn.addEventListener('click', function() {
-		if (selectedMarker) {
-		openDirectionsLink(selectedMarker.getLatLng().lat, selectedMarker.getLatLng().lng);
-		}
-		});
-		
-		// bind click event to occupancy graph button
-		occupancyGraphBtn.addEventListener('click', function() {
-		if (selectedMarker) {
-		// code to display occupancy graph
-		}
-		});
-							
-</script>
-</body>
 </html>
-		

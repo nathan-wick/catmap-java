@@ -1,0 +1,54 @@
+#mapid {
+	height: 500px;
+	width: 100%;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+:root {
+	--gradient-2: linear-gradient(90deg, #E00122, #ef546c);
+	--white: #fff;
+	--black: #000000;
+	--fs-8: 1.0 rem;
+	--fw-500: 500;
+	--uc-red-color: #E00122;
+	--transition-2: 0.35s ease;
+}
+             
+h1 {
+	font-family: "PT Sans", sans-serif;
+	color: var(--uc-red-color);
+}
+
+.h3 {
+	font-family: var(--ff-source-sans-pro);
+}
+
+.bg-gradient-red {
+	background-image: var(--gradient-2);
+	background-size: 200%;   
+}
+          
+.btn {
+	margin-top: 20px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 0 25px;
+	font-size: var(--fs-8);
+	font-weight: var(--fw-500);
+}
+
+.btn:is(:hover, :focus) {
+	background-position: right;
+}
+
+#nearby {
+	display: flex;
+	justify-content: center;
+	display: none;
+}
+
+#nearby .btn {
+	margin-left: 10px;
+}
